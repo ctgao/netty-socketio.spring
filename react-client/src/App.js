@@ -3,6 +3,14 @@ import './App.css';
 import './ChatClient.css';
 
 function App() {
+  var userName = 'user' + Math.floor((Math.random() * 1000) + 1);
+  var socket = io('http://localhost:9092/chat?token=abc123', {
+    transports: ['polling', 'websocket']
+  });
+  socket.on('connect', function () {
+    output('<span class="connect-msg">The client has connected with the server. Username: ' + userName + '</span>');
+  });
+
   return (
     <div>
       <div className="App">
